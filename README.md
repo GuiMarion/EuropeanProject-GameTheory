@@ -8,7 +8,7 @@ This project compute shaley value by country for European research projects. The
 
 The program will compute the shaley value for every country with the assumption that : 
 
-			v[Z] = mean of buget of every project that the member of 2 are involved in
+			v[Z] = buget mean of every project that contain the members of Z
 
 For exemple, if the database is : 
 
