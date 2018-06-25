@@ -22,7 +22,7 @@ DataBase.append(Project("nom", 1000, ["France", "Italy"], "Mathematics"))
 
 DataBase.append(Project("nom2", 999, ["France", "Italy"], "Mathematics"))
 
-DataBase.append(Project("nom2", 10, ["Moldova", "Russia"], "Mathematics"))
+DataBase.append(Project("nom2", 10, ["Moldova", "France"], "Mathematics"))
 
 
 printBase(DataBase)

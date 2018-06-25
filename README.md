@@ -36,7 +36,9 @@ Please don't forget to lauch the script after changing it :
 
 To get started : 
 
-			python3 Shaley.py
+			python3 Shapley.py
 
 
-This will print the shapley values for every country.
+This will print the shapley values for every country without taking into account of coalition with value of 0. If you want to take them into account please use the -a flag. 
+
+			python3 Shapley.py -a

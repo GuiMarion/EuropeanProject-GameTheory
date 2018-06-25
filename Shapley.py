@@ -1,8 +1,10 @@
 import pickle 
 from Project import *
+from optparse import OptionParser
+
 
 DataBaseName = "DataBase"
-
+No0Coalition = True
 
 
 def printBase(DataBase):
@@ -93,7 +95,7 @@ def toList(L):
 	return L
 
 
-def Shapley(Database):
+def Shapley(DataBase):
 	# Fill the shapley value for every country
 	shapley = {}
 	v = Fill(DataBase)
@@ -104,7 +106,10 @@ def Shapley(Database):
 		temp = 0
 		for Z in v:
 			if country in toList(Z) and len(toList(Z)) > 1:
-				temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+				if No0Coalition == False:
+					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+				elif v[Z] > 0:
+					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
 		shapley[country] = temp
 
 	return shapley
@@ -122,20 +127,41 @@ def ShapleyTest():
 		temp = 0
 		for Z in v:
 			if country in toList(Z) and len(toList(Z)) > 1:
-				temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+				if No0Coalition == False:
+					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+				elif v[Z] > 0:
+					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
 		shapley[country] = temp
 
 	return shapley
 
-DataBase = load(DataBaseName)
+def set0coalitionFalse():
+	global No0Coalition
+	No0Coalition = False
 
-printBase(DataBase)
+def main():
 
-print("Database succefully loaded.")
+	DataBase = load(DataBaseName)
+	printBase(DataBase)
+	print("Database succefully loaded.")
+	print(ShapleyTest())
+	print(Shapley(DataBase))
 
-print(Fill(DataBase))
 
-#print(ShapleyTest())
 
-print(Shapley(DataBase))
+
+if __name__ == "__main__":
+	parser = OptionParser()
+	parser.add_option("-a", "--allow0", action="store_true", dest="allow", help="Allow coalitions with value 0", metavar="allow0coalittion")
+	(options, args) = parser.parse_args()
+
+	if options.allow is not None:
+		set0coalitionFalse()
+	if len(args) == 0 :
+
+		main()
+
+	else:
+		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0)")
+
 
