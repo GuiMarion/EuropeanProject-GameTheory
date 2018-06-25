@@ -2,17 +2,17 @@
 This project implements the Shapley value computation for country coalition in European projets.
 
 
-This project compute shaley value by country for European research projects. The database contains projects as following : 
+This project compute shapley value by country for European research projects. The database contains projects as following : 
 
 			project(name: string, buget: int, countries: list, thematic: string)
 
-The program will compute the shaley value for every country with the assumption that : 
+The program will compute the shapley value for every country with the assumption that : 
 
 			v[Z] = buget mean of every project that contain the members of Z
 
 For exemple, if the database is : 
 
-		Project("nom2", 990, ["France", "Italy"], "Mathematics")
+		Project("nom1", 990, ["France", "Italy"], "Mathematics")
 		Project("nom2", 10, ["Moldova", "France"], "Mathematics")
 
 The function v will be, 
@@ -39,4 +39,4 @@ To get started :
 			python3 Shaley.py
 
 
-This will print the shaley values for every country.
+This will print the shapley values for every country.

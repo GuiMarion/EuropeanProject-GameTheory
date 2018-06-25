@@ -93,9 +93,9 @@ def toList(L):
 	return L
 
 
-def Shaley(Database):
-	# Fill the shaley value for every country
-	shaley = {}
+def Shapley(Database):
+	# Fill the shapley value for every country
+	shapley = {}
 	v = Fill(DataBase)
 	countries = listCountries(DataBase)
 	n = len(countries)
@@ -105,15 +105,15 @@ def Shaley(Database):
 		for Z in v:
 			if country in toList(Z) and len(toList(Z)) > 1:
 				temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
-		shaley[country] = temp
+		shapley[country] = temp
 
-	return shaley
+	return shapley
 
 
-def ShaleyTest(Database):
-	# Test with an example from the french wikipedia page for shaley value
+def ShapleyTest():
+	# Test with an example from the french wikipedia page for shapley value
 	# should be 20, 20, 80, so it works ! 
-	shaley = {}
+	shapley = {}
 	v = {"['1', '2', '3']" : 120, "['1', '2']" : 0, "['1', '3']" : 120, "['2', '3']" : 120, "['1']" : 0, "['2']" : 0, "['3']" : 0}
 	countries = ['1','2','3']
 	n = len(countries)
@@ -123,9 +123,9 @@ def ShaleyTest(Database):
 		for Z in v:
 			if country in toList(Z) and len(toList(Z)) > 1:
 				temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
-		shaley[country] = temp
+		shapley[country] = temp
 
-	return shaley
+	return shapley
 
 DataBase = load(DataBaseName)
 
@@ -133,7 +133,9 @@ printBase(DataBase)
 
 print("Database succefully loaded.")
 
-L = "['France', 'Italy', 'Moldova', 'Russia']"
+print(Fill(DataBase))
 
-print(Shaley(DataBase))
+#print(ShapleyTest())
+
+print(Shapley(DataBase))
 
