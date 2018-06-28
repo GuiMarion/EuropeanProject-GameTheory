@@ -1,6 +1,8 @@
 import pickle 
 from Project import *
 from optparse import OptionParser
+from tqdm import tqdm
+
 
 
 DataBaseName = "DataBase"
@@ -58,16 +60,21 @@ def subsetof(A, B):
 
 def Fill(DataBase): # Fille each countries with the mean of the buget of the projects involved in
 	dico = {}
-	for coalition in partiesliste(listCountries(DataBase)):
-		N = 0
-		dico[str(coalition)] = 0
-		for project in DataBase:
-			if subsetof(coalition, project.countries):
-				dico[str(coalition)] += project.buget
-				N += 1
-		if N == 0:
-			N = 1
-		dico[str(coalition)] = dico[str(coalition)]/N
+
+	parties = partiesliste(listCountries(DataBase))
+
+	with tqdm(total=len(parties)) as progress: 	
+		for coalition in parties:
+			N = 0
+			dico[str(coalition)] = 0
+			for project in DataBase:
+				if subsetof(coalition, project.countries):
+					dico[str(coalition)] += project.buget
+					N += 1
+			if N == 0:
+				N = 1
+			dico[str(coalition)] = dico[str(coalition)]/N
+			progress.update(1)
 	return dico
 
 def S(n, Z):
@@ -96,21 +103,24 @@ def toList(L):
 
 
 def Shapley(DataBase):
+
 	# Fill the shapley value for every country
 	shapley = {}
 	v = Fill(DataBase)
 	countries = listCountries(DataBase)
 	n = len(countries)
 
-	for country in countries:
-		temp = 0
-		for Z in v:
-			if country in toList(Z) and len(toList(Z)) > 1:
-				if No0Coalition == False:
-					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
-				elif v[Z] > 0:
-					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
-		shapley[country] = temp
+	with tqdm(total=len(countries)) as progress: 	
+		for country in countries:
+			temp = 0
+			for Z in v:
+				if country in toList(Z) and len(toList(Z)) > 1:
+					if No0Coalition == False:
+						temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+					elif v[Z] > 0:
+						temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+			shapley[country] = temp
+			progress.update(1)
 
 	return shapley
 
@@ -144,7 +154,7 @@ def main():
 	DataBase = load(DataBaseName)
 	printBase(DataBase)
 	print("Database succefully loaded.")
-	print(ShapleyTest())
+	#print(ShapleyTest())
 	print(Shapley(DataBase))
 
 
