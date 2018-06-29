@@ -107,7 +107,7 @@ def Fill_manually():
 
 
 
-Fill_from_directory("MiniBase")
+Fill_from_directory("DataBase")
 
 #Fill_manually()
 

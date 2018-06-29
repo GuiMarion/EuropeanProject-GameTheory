@@ -61,6 +61,8 @@ def subsetof(A, B):
 def Fill(DataBase): # Fille each countries with the mean of the buget of the projects involved in
 	dico = {}
 
+	print(len(listCountries(DataBase)))
+
 	parties = partiesliste(listCountries(DataBase))
 
 	with tqdm(total=len(parties)) as progress: 	
