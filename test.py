@@ -6,14 +6,14 @@ def partiesliste(seq):
 
     p = []
     i, imax = 0, 2**len(seq)-1
-    with tqdm(total=2**len(seq)) as progress:    
+    LEN = 2**(len(seq))
+    with tqdm(total=LEN) as progress:    
         while i <= imax:
             s = []
             j, jmax = 0, len(seq)-1
             while j <= jmax:
                 if (i>>j)&1 == 1:
                     s.append(seq[j])
-                    progress.update(1)
                 j += 1
             p.append(s)
             progress.update(1)
@@ -23,7 +23,7 @@ def partiesliste(seq):
 
 L = []
 
-for i in range(30):
+for i in range(20):
     L.append(i)
 
 print(len(partiesliste(L)))

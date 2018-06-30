@@ -21,16 +21,26 @@ def to_int(s):
 
 
 
-def look_for(node):
+def look_for_countries(node):
 	L = []
 	for child in node:
 		#print(node.tag)
 		if child.tag == "{http://cordis.europa.eu}name":
 
-			return [child.text]
+			return [child.text.replace(" ","")]
 		else: 
-			L = list(set(L + look_for(child)))
+			L = list(set(L + look_for_countries(child)))
 	return L
+
+def look_for_pga(node):
+	for child in node:
+		if child.tag == "{http://cordis.europa.eu}pga":
+
+			return child.text.replace(" ","")
+		else: 
+			ret = look_for_pga(child)
+			if ret is not None:
+				return ret
 
 def Fill_from_xmlfile(filename):
 
@@ -38,6 +48,7 @@ def Fill_from_xmlfile(filename):
 	doc = tree.getroot()
 	NAME = None
 	BUGET = None
+	PGA = None
 	Countries = []
 
 	for child in doc:
@@ -48,7 +59,9 @@ def Fill_from_xmlfile(filename):
 		if child.tag == "{http://cordis.europa.eu}ecMaxContribution":
 			BUGET = child.text
 		
-	Countries = (look_for(doc))
+	Countries = (look_for_countries(doc))
+
+	PGA = look_for_pga(doc)
 
 	if NAME is None:
 		raise ValueError("The file", filename, "doest have a name of project.")
@@ -59,25 +72,69 @@ def Fill_from_xmlfile(filename):
 	if Countries == []:
 		raise ValueError("The file", filename, "doest have any country.")
 
+	if PGA == None:
+		return None
 
-	return Project(NAME, to_int(BUGET), Countries, "")
+	return Project(NAME, to_int(BUGET), Countries, PGA)
 
 def printBase(DataBase):
 	for elem in DataBase:
 		print(elem)
 		print()
 
-def Fill_from_directory(dirname):
+def keep_only_certain_countries(DataBase, tokeep):
+	OUT = []
+	for project in DataBase:
+		keep = True
+		for country in project.countries:
+			if country not in tokeep:
+				keep = False
+				break
+		if keep:
+			OUT.append(project)
+
+	return OUT
+
+def keep_only_certain_gpa(DataBase, keep_gpa_with):
+	OUT = []
+	for project in DataBase:
+		keep = False
+		for gpa in keep_gpa_with:
+			if gpa in project.thematic:
+				keep = True
+				break
+		if keep:
+			OUT.append(project)
+
+	return OUT
+
+
+def Fill_from_directory(dirname, tokeep=None, keep_gpa_with=None):
 
 	print("We are converting your xml databse, wait for a few time please.")
 	DataBase = []
 	with tqdm(total=len(os.listdir(dirname))) as progress: 	
 		for file in os.listdir(dirname):
 			if file.endswith(".xml"):
-				DataBase.append(Fill_from_xmlfile(dirname + '/' + file))
+				Proj = Fill_from_xmlfile(dirname + '/' + file)
+				if Proj is not None:
+					DataBase.append(Proj)
 			progress.update(1)
 
+	if tokeep == []:
+		tokeep = None
+
+	if keep_gpa_with == []:
+		keep_gpa_with = None
+
+	if tokeep:
+		DataBase = keep_only_certain_countries(DataBase, tokeep)
+
+	if keep_gpa_with:
+		DataBase = keep_only_certain_gpa(DataBase, keep_gpa_with)
+
 	printBase(DataBase)
+	print("There is", len(DataBase), "projects in your database.")
 	pickle.dump( DataBase, open(DataBaseName, "wb" ) )
 	print("The database has been saved in the file", DataBaseName)
 	  
@@ -106,8 +163,12 @@ def Fill_manually():
 	print("The database has been saved in the file", DataBaseName)
 
 
+tokeep = ['Germany', 'UnitedKingdom']
+keep_gpa_with = ['H2020-EU.3']
 
-Fill_from_directory("DataBase")
+tokeep = []
+
+Fill_from_directory("Base", tokeep, keep_gpa_with)
 
 #Fill_manually()
 
