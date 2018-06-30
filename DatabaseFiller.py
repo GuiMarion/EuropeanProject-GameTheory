@@ -163,10 +163,9 @@ def Fill_manually():
 	print("The database has been saved in the file", DataBaseName)
 
 
-tokeep = ['Germany', 'UnitedKingdom']
+tokeep = ['Germany', 'UnitedKingdom', 'France', 'Portugal', 'Spain', 'Malta']
 keep_gpa_with = ['H2020-EU.3']
 
-tokeep = []
 
 Fill_from_directory("Base", tokeep, keep_gpa_with)
 
