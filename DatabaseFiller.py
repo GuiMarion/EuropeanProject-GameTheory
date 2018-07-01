@@ -168,10 +168,11 @@ def Fill_manually():
 Fill here the cuntries to keep and the gpas to keep
 
 '''
-#tokeep = ['Austria', 'Belgium', 'Croatia', 'Cyprus', 'CzechRepublic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Israel', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Spain', 'Sweden', 'Turkey', 'UnitedKingdom']
+
+tokeep = ['Austria', 'Belgium', 'Croatia', 'Cyprus', 'CzechRepublic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Israel', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Spain', 'Sweden', 'Turkey', 'UnitedKingdom']
+
 keep_gpa_with = ['H2020-EU.3.1']
 
-tokeep = []
 Fill_from_directory("Base", tokeep, keep_gpa_with)
 
 #Fill_manually()
