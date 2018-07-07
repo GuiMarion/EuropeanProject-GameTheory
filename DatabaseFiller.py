@@ -140,7 +140,7 @@ def Fill_from_directory(dirname, tokeep=None, keep_gpa_with=None):
 	print("The database has been saved in the file", DataBaseName)
 
 
-def printCountries(dirname, keep_gpa_with=None):
+def printCountries(dirname, tokeep = None, keep_gpa_with=None):
 
 	print("We are converting your xml databse, wait for a few time please.")
 	DataBase = []
@@ -154,6 +154,12 @@ def printCountries(dirname, keep_gpa_with=None):
 
 	if keep_gpa_with == []:
 		keep_gpa_with = None
+
+	if tokeep == []:
+		tokeep = None
+
+	if tokeep:
+		DataBase = keep_only_certain_countries(DataBase, tokeep)
 
 	if keep_gpa_with:
 		DataBase = keep_only_certain_gpa(DataBase, keep_gpa_with)
@@ -213,7 +219,7 @@ if __name__ == "__main__":
 	#keep_gpa_with = ['H2020-EU.3']
 
 	tokeep = []
-	keep_gpa_with = ['H2020-EU.3.1']
+	keep_gpa_with = []
 
 
 
