@@ -3,6 +3,7 @@ import pickle
 import os 
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
+from optparse import OptionParser
 
 
 
@@ -137,7 +138,41 @@ def Fill_from_directory(dirname, tokeep=None, keep_gpa_with=None):
 	print("There is", len(DataBase), "projects in your database.")
 	pickle.dump( DataBase, open(DataBaseName, "wb" ) )
 	print("The database has been saved in the file", DataBaseName)
-	  
+
+
+def printCountries(dirname, keep_gpa_with=None):
+
+	print("We are converting your xml databse, wait for a few time please.")
+	DataBase = []
+	with tqdm(total=len(os.listdir(dirname))) as progress: 	
+		for file in os.listdir(dirname):
+			if file.endswith(".xml"):
+				Proj = Fill_from_xmlfile(dirname + '/' + file)
+				if Proj is not None:
+					DataBase.append(Proj)
+			progress.update(1)
+
+	if keep_gpa_with == []:
+		keep_gpa_with = None
+
+	if keep_gpa_with:
+		DataBase = keep_only_certain_gpa(DataBase, keep_gpa_with)
+
+	print("There is", len(DataBase), "projects in your database.")
+
+	Countries = {}
+
+	for project in DataBase:
+		for country in project.countries:
+			if country in Countries:
+				Countries[country] += 1
+			else :
+				Countries[country] = 1
+
+	sorted_by_value = sorted(Countries.items(), reverse=True,  key=lambda kv: kv[1])
+
+	for i in range(len(sorted_by_value)):
+		print(i+1, ":", sorted_by_value[i][0], "->", sorted_by_value[i][1])
 
 def Fill_manually():
 
@@ -163,20 +198,37 @@ def Fill_manually():
 	print("The database has been saved in the file", DataBaseName)
 
 
-
-'''
-Fill here the cuntries to keep and the gpas to keep
-
-'''
-
-tokeep = ['Austria', 'Belgium', 'Croatia', 'Cyprus', 'CzechRepublic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Israel', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Spain', 'Sweden', 'Turkey', 'UnitedKingdom']
-tokeep = []
-keep_gpa_with = ['H2020-EU.1.3.1']
-
-Fill_from_directory("Base", tokeep, keep_gpa_with)
+if __name__ == "__main__":
+	parser = OptionParser()
+	parser.add_option("-a", "--allow0", action="store_true", dest="allow", help="Print the number of projects by countries", metavar="allow0coalittion")
+	(options, args) = parser.parse_args()
 
 
-#Fill_manually()
+	'''
+	Fill here the cuntries to keep and the gpas to keep
+
+	'''
+
+	#tokeep = ['Austria', 'Belgium', 'Croatia', 'Cyprus', 'CzechRepublic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Israel', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Spain', 'Sweden', 'Turkey', 'UnitedKingdom']
+	#keep_gpa_with = ['H2020-EU.3']
+
+	tokeep = []
+	keep_gpa_with = ['H2020-EU.3.1']
+
+
+
+	if options.allow is not None:
+
+		printCountries("Base", tokeep, keep_gpa_with)
+
+	elif len(args) == 0 :
+
+		Fill_from_directory("Base", tokeep, keep_gpa_with)
+
+		#Fill_manually()
+
+	else:
+		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0)")
 
 
 
