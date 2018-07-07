@@ -200,7 +200,7 @@ def Fill_manually():
 
 if __name__ == "__main__":
 	parser = OptionParser()
-	parser.add_option("-a", "--allow0", action="store_true", dest="allow", help="Allow coalitions with value 0", metavar="allow0coalittion")
+	parser.add_option("-a", "--allow0", action="store_true", dest="allow", help="Print the number of projects by countries", metavar="allow0coalittion")
 	(options, args) = parser.parse_args()
 
 	if options.allow is not None:
