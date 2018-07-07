@@ -2,7 +2,7 @@ import pickle
 from Project import *
 from optparse import OptionParser
 from tqdm import tqdm
-
+import time
 
 
 DataBaseName = "DataBase"
@@ -39,15 +39,18 @@ def partiesliste(seq):
 
     p = []
     i, imax = 0, 2**len(seq)-1
-    while i <= imax:
-        s = []
-        j, jmax = 0, len(seq)-1
-        while j <= jmax:
-            if (i>>j)&1 == 1:
-                s.append(seq[j])
-            j += 1
-        p.append(s)
-        i += 1 
+    LEN = 2**(len(seq))
+    with tqdm(total=LEN) as progress:    
+        while i <= imax:
+            s = []
+            j, jmax = 0, len(seq)-1
+            while j <= jmax:
+                if (i>>j)&1 == 1:
+                    s.append(seq[j])
+                j += 1
+            p.append(s)
+            progress.update(1)
+            i += 1 
     del p[0]
     return p
 
@@ -169,7 +172,9 @@ if __name__ == "__main__":
 		set0coalitionFalse()
 	if len(args) == 0 :
 
+		deb = time.clock()
 		main()
+		print("Computation Time :", abs(time.clock() - deb), "seconds")
 
 	else:
 		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0)")

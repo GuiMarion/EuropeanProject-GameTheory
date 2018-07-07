@@ -212,9 +212,12 @@ if __name__ == "__main__":
 
 	elif len(args) == 0 :
 
+		'''
+		Fill here the cuntries to keep and the gpas to keep
 
+		'''
 
-		#tokeep = ['Germany', 'UnitedKingdom', 'France', 'Portugal', 'Spain', 'Malta']
+		#tokeep = ['Austria', 'Belgium', 'Croatia', 'Cyprus', 'CzechRepublic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Israel', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Spain', 'Sweden', 'Turkey', 'UnitedKingdom']
 		#keep_gpa_with = ['H2020-EU.3']
 
 		tokeep = []
@@ -223,7 +226,6 @@ if __name__ == "__main__":
 		Fill_from_directory("Base", tokeep, keep_gpa_with)
 
 		#Fill_manually()
-
 
 	else:
 		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0)")
