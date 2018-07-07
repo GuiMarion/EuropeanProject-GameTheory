@@ -54,6 +54,24 @@ def partiesliste(seq):
     del p[0]
     return p
 
+def partieslisteWithoutPrint(seq):
+	# retuns all subsets possibles from seq
+
+    p = []
+    i, imax = 0, 2**len(seq)-1
+    while i <= imax:
+        s = []
+        j, jmax = 0, len(seq)-1
+        while j <= jmax:
+            if (i>>j)&1 == 1:
+                s.append(seq[j])
+            j += 1
+        p.append(s)
+        i += 1 
+    del p[0]
+    return p
+
+
 def subsetof(A, B):
 	# returns if A is a subset of B
 	for elem in A:
@@ -78,6 +96,23 @@ def Fill(DataBase): # Fille each countries with the mean of the buget of the pro
 				N = 1
 			dico[str(coalition)] = dico[str(coalition)]/N
 			progress.update(1)
+	return dico
+
+def FillWithoutPrint(DataBase): # Fille each countries with the mean of the buget of the projects involved in
+	dico = {}
+
+	parties = partieslisteWithoutPrint(listCountries(DataBase))
+
+	for coalition in parties:
+		N = 0
+		dico[str(coalition)] = 0
+		for project in DataBase:
+			if subsetof(coalition, project.countries):
+				dico[str(coalition)] += project.buget
+				N += 1
+		if N == 0:
+			N = 1
+		dico[str(coalition)] = dico[str(coalition)]/N
 	return dico
 
 def S(n, Z):
@@ -124,6 +159,27 @@ def Shapley(DataBase):
 						temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
 			shapley[country] = temp
 			progress.update(1)
+
+	return shapley
+
+
+def ShapleyWithoutPrint(DataBase):
+
+	# Fill the shapley value for every country
+	shapley = {}
+	v = FillWithoutPrint(DataBase)
+	countries = listCountries(DataBase)
+	n = len(countries)
+
+	for country in countries:
+		temp = 0
+		for Z in v:
+			if country in toList(Z) and len(toList(Z)) > 1:
+				if No0Coalition == False:
+					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+				elif v[Z] > 0:
+					temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+		shapley[country] = temp
 
 	return shapley
 

@@ -4,7 +4,7 @@ import os
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
 from optparse import OptionParser
-
+from sys import stdout
 
 
 
@@ -138,6 +138,53 @@ def Fill_from_directory(dirname, tokeep=None, keep_gpa_with=None):
 	print("There is", len(DataBase), "projects in your database.")
 	pickle.dump( DataBase, open(DataBaseName, "wb" ) )
 	print("The database has been saved in the file", DataBaseName)
+
+def getDatabase(keep_gpa_with, N):
+
+	dirname = "Base"
+	
+	DataBase = []
+
+	Total = len(os.listdir(dirname))
+	C = 0
+
+	for file in os.listdir(dirname):
+		if file.endswith(".xml"):
+			Proj = Fill_from_xmlfile(dirname + '/' + file)
+			if Proj is not None:
+				DataBase.append(Proj)
+			C += 1
+			if (100*C) % Total == 0:
+				print((C//Total) * 100, "%")
+				#stdout.flush()
+
+	if keep_gpa_with == []:
+		keep_gpa_with = None		
+
+	if keep_gpa_with:
+		DataBase = keep_only_certain_gpa(DataBase, keep_gpa_with)
+
+	Countries = {}
+
+	for project in DataBase:
+		for country in project.countries:
+			if country in Countries:
+				Countries[country] += 1
+			else :
+				Countries[country] = 1
+
+	sorted_by_value = sorted(Countries.items(), reverse=True,  key=lambda kv: kv[1])
+
+	tokeep = []
+
+	# Keeps only the N most occurent contries
+	for i in range(N):
+		tokeep.append(sorted_by_value[i][0])
+
+	DataBase = keep_only_certain_countries(DataBase, tokeep)
+
+	return DataBase
+
 
 
 def printCountries(dirname, tokeep = None, keep_gpa_with=None):
