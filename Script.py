@@ -52,6 +52,8 @@ def main(nb):
 			t3 = Thread(target=compute, args=(GPAs[i+2],))
 			t3.start()
 
+		sleep(60)
+
 main(2)
 
 
