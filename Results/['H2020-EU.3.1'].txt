@@ -1,0 +1,10 @@
+				Country List (nb of projects) 
+ 
+1 : UnitedKingdom -> 49
+2 : Germany -> 29
+
+ 
+				 Shapley Values
+ 
+1 : UnitedKingdom -> 0
+2 : Germany -> 0

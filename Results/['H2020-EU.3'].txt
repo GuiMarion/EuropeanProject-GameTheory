@@ -1,0 +1,10 @@
+				Country List (nb of projects) 
+ 
+1 : Spain -> 419
+2 : Germany -> 138
+
+ 
+				 Shapley Values
+ 
+1 : Germany -> 262508.51511535404
+2 : Spain -> 239804.5507246377
