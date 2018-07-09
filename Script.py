@@ -59,6 +59,6 @@ def main(nb):
 		t1.join()
 		t2.join()
 		t3.join()
-main(2)
+main(27)
 
 
