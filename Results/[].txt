@@ -1,0 +1,10 @@
+				Country List (nb of projects) 
+ 
+1 : UnitedKingdom -> 2425
+2 : Germany -> 1229
+
+ 
+				 Shapley Values
+ 
+1 : Germany -> 434226.15378117724
+2 : UnitedKingdom -> 260855.7176435077
