@@ -29,7 +29,7 @@ def compute(gpa, nb):
 	writeCountries(DataBase, file)
 	file.write("\n \n")
 	file.write("				 Shapley Values\n \n")
-	Values = ShapleyWithoutPrint(DataBase)
+	Values = Shapley(DataBase)
 	sorted_by_value = sorted(Values.items(), reverse=True,  key=lambda kv: kv[1])
 	for i in range(len(sorted_by_value)):
 		file.write(str(i+1) + " : " + str(sorted_by_value[i][0]) + " -> " + str(sorted_by_value[i][1]) + "\n")
@@ -39,6 +39,12 @@ def compute(gpa, nb):
 
 	print("End:", str(gpa))
 
+def main2(nb):
+	
+	GPAs = [[], ['H2020-EU.3'], ['H2020-EU.1.3.1'], ['H2020-EU.3.1'], ['H2020-EU.3.2'],  ['H2020-EU.3.3'],  ['H2020-EU.3.4'], ['H2020-EU.3.5'], ['H2020-EU.3.6'], ['H2020-EU.3.7']]
+
+	for elem in GPAs:
+		compute(elem,nb)
 
 def main(nb):
 
@@ -59,6 +65,6 @@ def main(nb):
 		t1.join()
 		t2.join()
 		t3.join()
-main(2)
+main2(27)
 
 
