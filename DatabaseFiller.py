@@ -290,7 +290,7 @@ if __name__ == "__main__":
 		print("				Countries by number of projects involved in")
 		print()
 
-		for i in range(len(Countries)):
+		for i in range(N):
 			print(i+1, ":", Countries[i][0], "->", Countries[i][1])
 
 		print()
