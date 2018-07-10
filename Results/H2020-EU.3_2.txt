@@ -1,4 +1,11 @@
+				Countries by number of projects involved in
+
+1 : Spain -> 1683
+2 : Germany -> 1673
+
+________________________________
+
 					Shapley Value
 
-{'UnitedKingdom': 260855.7176435077, 'Germany': 434226.15378117724}
-Computation Time : 0.032131999999999994 seconds
+{'Germany': 262508.51511535404, 'Spain': 239804.5507246377}
+Computation Time : 0.005277000000000004 seconds

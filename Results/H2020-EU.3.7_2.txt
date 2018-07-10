@@ -1,4 +1,4 @@
 					Shapley Value
 
-{'UnitedKingdom': 260855.7176435077, 'Germany': 434226.15378117724}
-Computation Time : 0.03407500000000002 seconds
+{'Germany': 0.0, 'UnitedKingdom': 0.0}
+Computation Time : 0.0022729999999999972 seconds
