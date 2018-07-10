@@ -229,7 +229,7 @@ if __name__ == "__main__":
 	if len(args) == 0 :	
 
 
-		print("					Shapley Value")	
+		print("				Shapley Value")	
 		print()
 		deb = time.clock()
 		main()
