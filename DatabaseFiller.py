@@ -145,18 +145,16 @@ def getDatabase(keep_gpa_with, N):
 	
 	DataBase = []
 
-	Total = len(os.listdir(dirname))
 	C = 0
+	with tqdm(total=len(os.listdir(dirname))) as progress: 	
+		for file in os.listdir(dirname):
+			if file.endswith(".xml"):
+				Proj = Fill_from_xmlfile(dirname + '/' + file)
+				if Proj is not None:
+					DataBase.append(Proj)
+			progress.update(1)
 
-	for file in os.listdir(dirname):
-		if file.endswith(".xml"):
-			Proj = Fill_from_xmlfile(dirname + '/' + file)
-			if Proj is not None:
-				DataBase.append(Proj)
-			C += 1
-			if (100*C) % Total == 0:
-				print((C//Total) * 100, "%")
-				#stdout.flush()
+					#stdout.flush()
 
 	if keep_gpa_with == []:
 		keep_gpa_with = None		
@@ -181,9 +179,10 @@ def getDatabase(keep_gpa_with, N):
 	for i in range(N):
 		tokeep.append(sorted_by_value[i][0])
 
+
 	DataBase = keep_only_certain_countries(DataBase, tokeep)
 
-	return DataBase
+	return (DataBase, sorted_by_value)
 
 
 
@@ -279,6 +278,47 @@ if __name__ == "__main__":
 		Fill_from_directory("Base", tokeep, keep_gpa_with)
 
 		#Fill_manually()
+
+	elif len(args) == 1:
+
+		gpa = []
+		N = int(args[0])
+
+		(DataBase, Countries) = getDatabase(gpa, N)
+
+
+		print("				Countries by number of projects involved in")
+		print()
+
+		for i in range(len(Countries)):
+			print(i+1, ":", Countries[i][0], "->", Countries[i][1])
+
+		print()
+		print("________________________________")
+		print()
+
+		pickle.dump( DataBase, open(DataBaseName, "wb" ) )
+
+	elif len(args) == 2 : 
+
+		gpa = []
+
+		gpa.append(args[0])
+		N = int(args[1])
+
+		(DataBase, Countries) = getDatabase(gpa, N)
+
+		print("				Countries by number of projects involved in")
+		print()
+
+		for i in range(N):
+			print(i+1, ":", Countries[i][0], "->", Countries[i][1])
+
+		print()
+		print("________________________________")
+		print()
+
+		pickle.dump( DataBase, open(DataBaseName, "wb" ) )
 
 	else:
 		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0)")

@@ -211,8 +211,8 @@ def set0coalitionFalse():
 def main():
 
 	DataBase = load(DataBaseName)
-	printBase(DataBase)
-	print("Database succefully loaded.")
+	#printBase(DataBase)
+	#print("Database succefully loaded.")
 	#print(ShapleyTest())
 	print(Shapley(DataBase))
 
@@ -226,8 +226,11 @@ if __name__ == "__main__":
 
 	if options.allow is not None:
 		set0coalitionFalse()
-	if len(args) == 0 :
+	if len(args) == 0 :	
 
+
+		print("					Shapley Value")	
+		print()
 		deb = time.clock()
 		main()
 		print("Computation Time :", abs(time.clock() - deb), "seconds")
