@@ -23,8 +23,8 @@ def compute(gpa, nb):
 
 	print("Start:", str(gpa))
 
-	file = open("Results/"+str(gpa)+".txt",'w')
-	DataBase = getDatabase(gpa, nb)
+	file = open("Results/"+str(gpa)+"_"+ str(nb)+".txt",'w')
+	DataBase = getDatabaseWithoutprint(gpa, nb)
 	file.write("				Country List (nb of projects) \n \n")
 	writeCountries(DataBase, file)
 	file.write("\n \n")
@@ -66,4 +66,4 @@ def main(nb):
 		t2.join()
 		t3.join()
 
-main2(27)
+main(2)
