@@ -29,7 +29,7 @@ def compute(gpa, nb):
 	writeCountries(DataBase, file)
 	file.write("\n \n")
 	file.write("				 Shapley Values\n \n")
-	Values = Shapley(DataBase)
+	Values = ShapleyWithoutPrint(DataBase)
 	sorted_by_value = sorted(Values.items(), reverse=True,  key=lambda kv: kv[1])
 	for i in range(len(sorted_by_value)):
 		file.write(str(i+1) + " : " + str(sorted_by_value[i][0]) + " -> " + str(sorted_by_value[i][1]) + "\n")
