@@ -37,9 +37,10 @@ def listCountries(DataBase):
 def partiesliste(seq):
 	# retuns all subsets possibles from seq
 
-    p = []
     i, imax = 0, 2**len(seq)-1
     LEN = 2**(len(seq))
+    p = [None] * LEN
+    indice = 0
     with tqdm(total=LEN) as progress:    
         while i <= imax:
             s = []
@@ -48,7 +49,8 @@ def partiesliste(seq):
                 if (i>>j)&1 == 1:
                     s.append(seq[j])
                 j += 1
-            p.append(s)
+            p[indice] = s
+            indice += 1
             progress.update(1)
             i += 1 
     del p[0]
@@ -80,14 +82,15 @@ def subsetof(A, B):
 	return True
 
 def Fill(DataBase): # Fille each countries with the mean of the buget of the projects involved in
-	dico = {}
-
+	
 	parties = partiesliste(listCountries(DataBase))
+
+
+	dico = {str(c) : 0 for c in parties}
 
 	with tqdm(total=len(parties)) as progress: 	
 		for coalition in parties:
 			N = 0
-			dico[str(coalition)] = 0
 			for project in DataBase:
 				if subsetof(coalition, project.countries):
 					dico[str(coalition)] += project.buget

@@ -189,13 +189,20 @@ def getDatabase(keep_gpa_with, N):
 def printCountries(dirname, tokeep = None, keep_gpa_with=None):
 
 	print("We are converting your xml databse, wait for a few time please.")
-	DataBase = []
-	with tqdm(total=len(os.listdir(dirname))) as progress: 	
+
+	Total = len(os.listdir(dirname))
+
+	DataBase = [None] * Total
+
+	k = 0
+
+	with tqdm(total=Total) as progress: 	
 		for file in os.listdir(dirname):
 			if file.endswith(".xml"):
 				Proj = Fill_from_xmlfile(dirname + '/' + file)
 				if Proj is not None:
-					DataBase.append(Proj)
+					DataBase[k] = Proj
+					k += 1
 			progress.update(1)
 
 	if keep_gpa_with == []:
