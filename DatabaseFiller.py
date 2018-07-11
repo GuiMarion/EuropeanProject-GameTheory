@@ -185,6 +185,49 @@ def getDatabase(keep_gpa_with, N):
 	return (DataBase, sorted_by_value)
 
 
+def getDatabaseWithoutprint(keep_gpa_with, N):
+
+	dirname = "Base"
+	
+	DataBase = []
+
+	C = 0
+	for file in os.listdir(dirname):
+		if file.endswith(".xml"):
+			Proj = Fill_from_xmlfile(dirname + '/' + file)
+			if Proj is not None:
+				DataBase.append(Proj)
+
+					#stdout.flush()
+
+	if keep_gpa_with == []:
+		keep_gpa_with = None		
+
+	if keep_gpa_with:
+		DataBase = keep_only_certain_gpa(DataBase, keep_gpa_with)
+
+	Countries = {}
+
+	for project in DataBase:
+		for country in project.countries:
+			if country in Countries:
+				Countries[country] += 1
+			else :
+				Countries[country] = 1
+
+	sorted_by_value = sorted(Countries.items(), reverse=True,  key=lambda kv: kv[1])
+
+	tokeep = []
+
+	# Keeps only the N most occurent contries
+	for i in range(N):
+		tokeep.append(sorted_by_value[i][0])
+
+
+	DataBase = keep_only_certain_countries(DataBase, tokeep)
+
+	return DataBase
+
 
 def printCountries(dirname, tokeep = None, keep_gpa_with=None):
 
