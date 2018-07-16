@@ -322,7 +322,8 @@ def Fill_manually():
 
 
 if __name__ == "__main__":
-	parser = OptionParser()
+	parser = OptionParser(usage="%prog [options] <gpas to keep> <number of contries to keep>")
+
 	parser.add_option("-a", "--allow0", action="store_true", dest="allow", help="Print the number of projects by countries", metavar="allow0coalittion")
 	(options, args) = parser.parse_args()
 
@@ -392,7 +393,7 @@ if __name__ == "__main__":
 		pickle.dump( DataBase, open(DataBaseName, "wb" ) )
 
 	else:
-		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0)")
+		print("Usage: Python3 Shapley.py (-a to take account of coalition with value of 0) <gpas> <nb of contries>")
 
 
 
