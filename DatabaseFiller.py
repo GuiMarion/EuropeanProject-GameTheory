@@ -287,11 +287,32 @@ def Fill_manually():
 
 	"""
 	# Project(nom, buget, counties, thematic)
-	DataBase.append(Project("nom", 1000, ["France", "Italy"], "Mathematics"))
+	DataBase.append(Project("nom", 10, ["France"], "Mathematics"))
 
-	DataBase.append(Project("nom2", 999, ["France", "Italy"], "Mathematics"))
+	DataBase.append(Project("nom", 5, ["Croatie"], "Mathematics"))
 
-	DataBase.append(Project("nom2", 10, ["Moldova", "France"], "Mathematics"))
+	DataBase.append(Project("nom", 10, ["Angleterre"], "Mathematics"))
+
+	DataBase.append(Project("nom", 20, ["France", "Croatie"], "Mathematics"))
+
+	DataBase.append(Project("nom", 25, ["France", "Angleterre"], "Mathematics"))
+
+	DataBase.append(Project("nom", 30, ["France", "Croatie", "Angleterre"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 4, ["France"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 2, ["Croatie"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 5, ["Angleterre"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 10, ["France", "Croatie"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 12, ["France", "Angleterre"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 14, ["Angleterre", "Croatie"], "Mathematics"))
+
+	# DataBase.append(Project("nom", 20, ["France", "Croatie", "Angleterre"], "Mathematics"))
+
 
 	printBase(DataBase)
 
@@ -325,9 +346,9 @@ if __name__ == "__main__":
 
 	elif len(args) == 0 :
 
-		Fill_from_directory("Base", tokeep, keep_gpa_with)
+		#Fill_from_directory("Base", tokeep, keep_gpa_with)
 
-		#Fill_manually()
+		Fill_manually()
 
 	elif len(args) == 1:
 

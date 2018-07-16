@@ -1,0 +1,10 @@
+				Country List (nb of projects) 
+ 
+1 : Italy -> 20
+2 : UnitedKingdom -> 17
+
+ 
+				 Shapley Values
+ 
+1 : UnitedKingdom -> 5128763.0
+2 : Italy -> 2394362.5

@@ -85,37 +85,46 @@ def Fill(DataBase): # Fille each countries with the mean of the buget of the pro
 	
 	parties = partiesliste(listCountries(DataBase))
 
-
 	dico = {str(c) : 0 for c in parties}
 
 	with tqdm(total=len(parties)) as progress: 	
 		for coalition in parties:
-			N = 0
 			for project in DataBase:
-				if subsetof(coalition, project.countries):
+				if len(coalition) == len(project.countries) and subsetof(coalition, project.countries):
 					dico[str(coalition)] += project.buget
-					N += 1
-			if N == 0:
-				N = 1
-			dico[str(coalition)] = dico[str(coalition)]/N
+					
+			if len(coalition) > 1 :
+				for country in coalition:
+					try:
+						dico[str(coalition)] += dico[str([country])]
+					except KeyError:
+						print(country)
+						print(dico)
+						raise KeyError("Ordering parties problem")
+
 			progress.update(1)
 	return dico
 
 def FillWithoutPrint(DataBase): # Fille each countries with the mean of the buget of the projects involved in
-	dico = {}
 
 	parties = partieslisteWithoutPrint(listCountries(DataBase))
 
+	dico = {str(c) : 0 for c in parties}
+
 	for coalition in parties:
-		N = 0
 		dico[str(coalition)] = 0
 		for project in DataBase:
-			if subsetof(coalition, project.countries):
+			if len(coalition) == len(project.countries) and subsetof(coalition, project.countries):
 				dico[str(coalition)] += project.buget
-				N += 1
-		if N == 0:
-			N = 1
-		dico[str(coalition)] = dico[str(coalition)]/N
+				
+		if len(coalition) > 1 :
+			for country in coalition:
+				try:
+					dico[str(coalition)] += dico[str([country])]
+				except KeyError:
+					print(country)
+					print(dico)
+					raise KeyError("Ordering parties problem")
 	return dico
 
 def S(n, Z):
@@ -160,6 +169,7 @@ def Shapley(DataBase):
 						temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
 					elif v[Z] > 0:
 						temp += S(n, toList(Z)) * (v[Z] - v[str(depof(toList(Z), country))])
+
 			shapley[country] = temp
 			progress.update(1)
 

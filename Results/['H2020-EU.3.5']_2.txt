@@ -1,0 +1,10 @@
+				Country List (nb of projects) 
+ 
+1 : Spain -> 57
+2 : Italy -> 51
+
+ 
+				 Shapley Values
+ 
+1 : Spain -> 10630700.0
+2 : Italy -> 5333466.0
