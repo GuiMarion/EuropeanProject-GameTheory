@@ -1,0 +1,35 @@
+using gpa = H2020-EU.3.6 and 25 countries
+				Countries by number of projects involved in
+
+1 : UnitedKingdom -> 130
+2 : Italy -> 121
+3 : Germany -> 116
+4 : Spain -> 96
+5 : France -> 74
+6 : Belgium -> 69
+7 : Netherlands -> 67
+8 : Greece -> 67
+9 : Austria -> 52
+10 : Poland -> 43
+11 : Denmark -> 39
+12 : Sweden -> 39
+13 : Hungary -> 38
+14 : Portugal -> 37
+15 : Finland -> 33
+16 : Ireland -> 30
+17 : Norway -> 29
+18 : Turkey -> 26
+19 : Switzerland -> 23
+20 : Estonia -> 20
+21 : Lithuania -> 19
+22 : CzechRepublic -> 19
+23 : Slovenia -> 19
+24 : Slovakia -> 16
+25 : Romania -> 16
+
+________________________________
+
+				Shapley Value
+
+{'Spain': 32494.64600569122, 'Poland': 38019.52624844364, 'Slovakia': -14392.948243890016, 'Italy': 15850.816138962868, 'Belgium': 38457.012600003094, 'UnitedKingdom': 23903.29251120735, 'Austria': 7441.993058694493, 'Finland': 37918.969186340146, 'Hungary': 12553.350124164006, 'Germany': 24087.766271705885, 'Netherlands': 55576.44369566578, 'Romania': 36030.917721681515, 'Greece': 35147.403283370724, 'France': 28360.177203764066, 'Ireland': 66099.78693097126, 'Portugal': -10710.62446385509, 'Norway': 51152.81904175012, 'CzechRepublic': 38638.47084750973, 'Estonia': 36278.956174535175, 'Lithuania': -6694.034115514076, 'Turkey': 28806.23148712041, 'Denmark': 34709.59478069535, 'Sweden': 1158.8818787014566, 'Switzerland': 17815.56776513995, 'Slovenia': -1154.3087924857166}
+Computation Time : 4901.99441 seconds

@@ -66,4 +66,4 @@ def main(nb):
 		t2.join()
 		t3.join()
 
-main(2)
+main(20)

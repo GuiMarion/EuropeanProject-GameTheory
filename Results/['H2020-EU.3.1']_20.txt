@@ -1,0 +1,46 @@
+				Country List (nb of projects) 
+ 
+1 : UnitedKingdom -> 197
+2 : Germany -> 179
+3 : Spain -> 152
+4 : Italy -> 145
+5 : Netherlands -> 140
+6 : France -> 134
+7 : Belgium -> 90
+8 : Sweden -> 77
+9 : Denmark -> 68
+10 : Switzerland -> 52
+11 : Austria -> 45
+12 : Israel -> 43
+13 : Finland -> 39
+14 : Ireland -> 38
+15 : Portugal -> 31
+16 : Greece -> 30
+17 : UnitedStates -> 27
+18 : Norway -> 23
+19 : Poland -> 22
+20 : Hungary -> 17
+
+ 
+				 Shapley Values
+ 
+1 : UnitedStates -> 557125.5168191525
+2 : Hungary -> 403272.81147973385
+3 : Austria -> 400072.3884605996
+4 : Switzerland -> 349568.3062264308
+5 : Sweden -> 304661.9840483338
+6 : Denmark -> 250335.75228893672
+7 : France -> 217333.4375366719
+8 : Finland -> 199101.87353003642
+9 : Spain -> 198274.06316820823
+10 : Netherlands -> 190223.53266841912
+11 : Italy -> 184586.8510434513
+12 : Belgium -> 170693.63802143678
+13 : UnitedKingdom -> 162100.82922922337
+14 : Germany -> 101372.44422378026
+15 : Ireland -> 62105.455200929646
+16 : Norway -> -10329.637022960445
+17 : Greece -> -27613.738819441962
+18 : Israel -> -62260.14391106954
+19 : Poland -> -147749.39452443793
+20 : Portugal -> -200333.1623732179
