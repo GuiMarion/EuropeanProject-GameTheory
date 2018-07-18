@@ -64,7 +64,7 @@ You can compute statistics on the database using our scripts.
 
 You can use ComputeAll.py to compute Shapley values for N countries with all gpas in the database and fill the /Results folder. 
 
-### Usage: Python3 ComputeAll.py <nb of countries>
+	Usage: Python3 ComputeAll.py <nb of countries>
 
 		Options:
 		  -h, --help  show this help message and exit
@@ -73,7 +73,7 @@ You can use ComputeAll.py to compute Shapley values for N countries with all gpa
 
 You can use ComputeAllParallel.py to compute Shapley values for N countries with all gpas in the database and fill the /Results folder with 3 gpa computations in the same time. Be carefull, with big N you can quickly fill the RAM ! 
 
-### Usage: Python3 ComputeAllParallel.py <nb of countries>
+	Usage: Python3 ComputeAllParallel.py <nb of countries>
 
 		Options:
 		  -h, --help  show this help message and exit
