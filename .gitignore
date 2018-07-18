@@ -1,3 +1,5 @@
 __pycache__/*
 Base/*
 MiniBase/*
+__MACOSX/*
+.DS_Store

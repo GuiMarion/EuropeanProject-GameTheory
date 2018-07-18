@@ -1,4 +1,5 @@
 import os
+from optparse import OptionParser
 
 def main(nb):
 	
@@ -9,4 +10,17 @@ def main(nb):
 		os.system("python3 DatabaseFiller.py " + gpa[0] + " "+str(nb) + " >> Results/"+ gpa[0]+"_"+str(nb)+".txt")
 		os.system("python3 Shapley.py >> Results/"+ gpa[0]+"_"+str(nb)+".txt")
 
-main(25)
+
+if __name__ == "__main__":
+	parser = OptionParser("Usage: Python3 ComputeAllParallel.py <nb of countries>")
+	(options, args) = parser.parse_args()
+
+	if len(args) == 1 :	
+
+		try :
+			main(int(args[0]))
+		except ValueError:
+			print("You must use integers.")
+
+	else:
+		print("Usage: Python3 ComputeAll.py <nb of countries>")
