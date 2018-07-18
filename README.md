@@ -1,6 +1,4 @@
 # EuropeanProject-GameTheory
-This project implements the Shapley value computation for country coalition in European projets.
-
 
 This project compute shapley value by country for European research projects. The database contains projects as following : 
 
