@@ -8,9 +8,9 @@ Where project is a class defined in Project.py.
 
 The program will compute the shapley value for every country with the assumption that : 
 
-			v[Z] = sum of buget of all the projects where there is only Z (if |Z| = 1)
-			
-			v[Z] = sum of every buget of countries in Z + sum of buget of every projects where there is exactly Z.
+	v[Z] = sum of buget of all the projects where there is only Z (if |Z| = 1)
+	
+	v[Z] = sum of every buget of countries in Z + sum of buget of every projects where there is exactly Z.
 
 For exemple, if the database is : 
 
