@@ -235,7 +235,7 @@ def printCountries(dirname, tokeep = None, keep_gpa_with=None):
 
 	Total = len(os.listdir(dirname))
 
-	DataBase = [None] * Total
+	DataBase = [None] * (Total -1)
 
 	k = 0
 
@@ -246,6 +246,8 @@ def printCountries(dirname, tokeep = None, keep_gpa_with=None):
 				if Proj is not None:
 					DataBase[k] = Proj
 					k += 1
+				else:
+					del DataBase[-1]
 			progress.update(1)
 
 	if keep_gpa_with == []:
